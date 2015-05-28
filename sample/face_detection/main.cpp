@@ -25,13 +25,9 @@ using namespace std;
 void camera_work(bool isCL){
 
 	FaceDetector *detector;
-	if (isCL) {
-		detector = new FaceDetectorCL("face_single_CL");
-	}
-	else{
-		detector = new FaceDetectorCpu("face_single_cpu");
-	}
-
+	if (isCL) { detector = new FaceDetectorCL("face_single_CL");	}
+	else{ detector = new FaceDetectorCpu("face_single_cpu"); }
+	
 	//HAAR_EYE_TREE_EYEGLASSES_DATA
 	//HAAR_EYE_DATA
 	//HAAR_FRONT_FACE_DEFAULT_DATA
@@ -43,7 +39,7 @@ void camera_work(bool isCL){
     cv::Mat frame,frameCopy, image;
 
 	unsigned int count = 0;
-	if(!videoCapture.open(1)) { cout << "No camera detected" << endl; return; }
+	if(!videoCapture.open(2)) { cout << "No camera detected" << endl; return; }
 	
 	cv::namedWindow("result", 1 );
     
@@ -94,7 +90,6 @@ void image_work(bool isCL){
 	}
 	
 	cv::Mat matDst;
-
 	detector->load(HAAR_FRONT_FACE_DEFAULT_DATA);
 	detector->setSrcImg(img, 1);
 	detector->doWork();
@@ -106,7 +101,6 @@ void video_work_tapi(){
 	int count = THREAD_NUM;
 	std::vector<FaceDetector*> faceDetector;
 	
-	
 	for (int i = 0; i<count; i++){
 		std::string str = "face";
 		char num[5];
@@ -115,12 +109,8 @@ void video_work_tapi(){
 		FaceDetector *detector;
 
 		bool isCL = isThreadUseCL();
-		if (isCL) {
-			detector = new FaceDetectorCL(str.c_str());
-		}
-		else{
-			detector = new FaceDetectorCpu(str.c_str());
-		}
+		if (isCL) { detector = new FaceDetectorCL(str.c_str()); }
+		else{ detector = new FaceDetectorCpu(str.c_str()); }
 		
 		detector->setVideoFile(VIDEO_VGA);
 		faceDetector.push_back(detector);
@@ -129,13 +119,10 @@ void video_work_tapi(){
 
 	while (1){
 		Sleep(1000);
-		if (waitKey(10) >= 0){
-			break;
-		}
+		if (waitKey(10) >= 0){ break; }
 	}
 	return;
 }
-
 
 int main(){
 	/*
@@ -158,7 +145,7 @@ int main(){
 	*/
 
 	
-	bool clDeviceFound = false;
+	bool clDeviceFound = true;
 	cv::ocl::setUseOpenCL(clDeviceFound);
 	
 	/*
@@ -166,7 +153,7 @@ int main(){
 	video_work_tapi();
 	*/
 	//image_work(clDeviceFound);
-	//camera_work(clDeviceFound);
+	camera_work(clDeviceFound);
 	
 	return 0;
 }

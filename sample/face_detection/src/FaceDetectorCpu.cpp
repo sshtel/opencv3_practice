@@ -46,10 +46,8 @@ int FaceDetectorCpu::cutFace(){
 int FaceDetectorCpu::cutEyes(){
 	
 	cv::cvtColor(matSrc_, matGray_, CV_BGR2GRAY);		
-	
 	//cv::equalizeHist(matGray_, matGray_);
 	//cv::GaussianBlur(matGray_, matGray_, cv::Size(3, 3), 1, 1);
-	//this->showImage(matGray_);
 	std::vector<cv::Rect> faces;
 	
 	face_classifier_.detectMultiScale(matGray_, faces, 1.1, // must be bigger than 1.0
