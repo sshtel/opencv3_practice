@@ -15,42 +15,42 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\DeviceOcl\device_ocl.cpp">
+    <ClCompile Include="..\..\face_detection\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\face_detection\main.cpp">
+    <ClCompile Include="..\..\face_detection\WorkThreadWin32.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\face_detection\WorkThreadWin32.cpp">
+    <ClCompile Include="..\..\face_detection\src\FaceDetector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\face_detection\src\FaceDetector.cpp">
+    <ClCompile Include="..\..\face_detection\src\FaceDetectorCL.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\face_detection\src\FaceDetectorCL.cpp">
+    <ClCompile Include="..\..\face_detection\src\FaceDetectorCpu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\face_detection\src\FaceDetectorCpu.cpp">
+    <ClCompile Include="..\..\DeviceOcl\device_ocl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\DeviceOcl\device_ocl.h">
+    <ClInclude Include="..\..\face_detection\WorkThreadWin32.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\face_detection\WorkThreadWin32.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\face_detection\include\FaceData.hpp">
+    <ClInclude Include="..\..\face_detection\include\FaceData.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\face_detection\include\FaceDetector.hpp">
+    <ClInclude Include="..\..\face_detection\include\FaceDetector.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\face_detection\include\FaceDetectorCL.hpp">
+    <ClInclude Include="..\..\face_detection\include\FaceDetectorCL.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\face_detection\include\FaceDetectorCpu.hpp">
+    <ClInclude Include="..\..\face_detection\include\FaceDetectorCpu.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\DeviceOcl\device_ocl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

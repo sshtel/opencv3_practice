@@ -18,6 +18,22 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\DeviceOcl\device_ocl.cpp" />
+    <ClCompile Include="..\..\face_detection\main.cpp" />
+    <ClCompile Include="..\..\face_detection\src\FaceDetector.cpp" />
+    <ClCompile Include="..\..\face_detection\src\FaceDetectorCL.cpp" />
+    <ClCompile Include="..\..\face_detection\src\FaceDetectorCpu.cpp" />
+    <ClCompile Include="..\..\face_detection\WorkThreadWin32.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\DeviceOcl\device_ocl.h" />
+    <ClInclude Include="..\..\face_detection\include\FaceData.hpp" />
+    <ClInclude Include="..\..\face_detection\include\FaceDetector.hpp" />
+    <ClInclude Include="..\..\face_detection\include\FaceDetectorCL.hpp" />
+    <ClInclude Include="..\..\face_detection\include\FaceDetectorCpu.hpp" />
+    <ClInclude Include="..\..\face_detection\WorkThreadWin32.hpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5377DF97-49B0-47E2-81BD-53FBFE339CBD}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -103,13 +119,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\opencv\include;..\..\..\DeviceOcl;..\..\..\face_detection\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\opencv\include;..\..\DeviceOcl;..\..\face_detection\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>opencv_world300d.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\..\opencv\x64\vc12\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\opencv\x64\vc12\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -140,7 +156,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\opencv\include;..\..\include;..\..\..\DeviceOcl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\opencv\include;..\..\face_detection\include;..\..\DeviceOcl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -148,25 +164,9 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>opencv_world300.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\..\opencv\x64\vc12\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\opencv\x64\vc12\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\DeviceOcl\device_ocl.cpp" />
-    <ClCompile Include="..\..\..\face_detection\main.cpp" />
-    <ClCompile Include="..\..\..\face_detection\src\FaceDetector.cpp" />
-    <ClCompile Include="..\..\..\face_detection\src\FaceDetectorCL.cpp" />
-    <ClCompile Include="..\..\..\face_detection\src\FaceDetectorCpu.cpp" />
-    <ClCompile Include="..\..\..\face_detection\WorkThreadWin32.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\DeviceOcl\device_ocl.h" />
-    <ClInclude Include="..\..\..\face_detection\include\FaceData.hpp" />
-    <ClInclude Include="..\..\..\face_detection\include\FaceDetector.hpp" />
-    <ClInclude Include="..\..\..\face_detection\include\FaceDetectorCL.hpp" />
-    <ClInclude Include="..\..\..\face_detection\include\FaceDetectorCpu.hpp" />
-    <ClInclude Include="..\..\..\face_detection\WorkThreadWin32.hpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
