@@ -1,14 +1,17 @@
 #include <FaceData.hpp>
 #include <FaceDetectorCpu.hpp>
 #include <FaceDetectorCL.hpp>
-#include "WorkThreadWin32.hpp"
-#include "device_ocl.h"
+#include <device_ocl.h>
 
-#include <windows.h>
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui.hpp>
+
+#ifdef WIN32
+#include "WorkThreadWin32.hpp"
+#include <windows.h>
 #include <process.h>
 #include <stdlib.h>
+#endif
 
 using namespace cv;
 using namespace std;
@@ -125,27 +128,20 @@ void video_work_tapi(){
 }
 
 int main(){
-	/*
+
 	//cv::ocl::setDevice function (with cv::ocl::getOpenCLPlatforms and cv::ocl::getOpenCLDevices).
 	bool clDeviceFound = false;
-	
+
 	std::string platformName = "AMD";
 	//std::string platformName = "Intel";
 	int deviceType = cv::ocl::Device::TYPE_GPU;
-	
-	DeviceOcl devOcl;
-	
-	if(1){
-		clDeviceFound = devOcl.setDevice(platformName.c_str(), deviceType);
-	}
-	
-	if(0){
-		clDeviceFound = devOcl.setDeviceFromAnyPlatform(deviceType);
-	}
-	*/
+	int vendor = cv::ocl::Device::VENDOR_AMD;
 
+	DeviceOcl devOcl;
+	clDeviceFound = devOcl.setDevice(platformName.c_str(), deviceType);
+		
+	//clDeviceFound = devOcl.setDevice(vendor, deviceType);
 	
-	bool clDeviceFound = true;
 	cv::ocl::setUseOpenCL(clDeviceFound);
 	
 	/*

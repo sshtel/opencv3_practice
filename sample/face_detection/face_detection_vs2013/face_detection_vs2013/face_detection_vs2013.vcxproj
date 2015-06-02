@@ -103,7 +103,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\include;..\..\..\..\opencv\include;..\..\..\opencv\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\..\..\opencv\include;..\..\..\opencv\include;..\..\..\DeviceOcl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -140,7 +140,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\..\opencv\include;..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\opencv\include;..\..\include;..\..\..\DeviceOcl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -152,7 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\device_ocl.cpp" />
+    <ClCompile Include="..\..\..\DeviceOcl\device_ocl.cpp" />
     <ClCompile Include="..\..\main.cpp" />
     <ClCompile Include="..\..\src\FaceDetector.cpp" />
     <ClCompile Include="..\..\src\FaceDetectorCL.cpp" />
@@ -160,7 +160,7 @@
     <ClCompile Include="..\..\WorkThreadWin32.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\device_ocl.h" />
+    <ClInclude Include="..\..\..\DeviceOcl\device_ocl.h" />
     <ClInclude Include="..\..\include\FaceData.hpp" />
     <ClInclude Include="..\..\include\FaceDetector.hpp" />
     <ClInclude Include="..\..\include\FaceDetectorCL.hpp" />

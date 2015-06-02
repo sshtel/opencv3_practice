@@ -24,13 +24,13 @@
     <ClCompile Include="..\..\src\FaceDetectorCL.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\device_ocl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WorkThreadWin32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\DeviceOcl\device_ocl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,10 +47,10 @@
     <ClInclude Include="..\..\include\FaceDetectorCL.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\device_ocl.h">
+    <ClInclude Include="..\..\WorkThreadWin32.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\WorkThreadWin32.hpp">
+    <ClInclude Include="..\..\..\DeviceOcl\device_ocl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
