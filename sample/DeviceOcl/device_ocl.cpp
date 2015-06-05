@@ -5,6 +5,8 @@ bool DeviceOcl::setDevice(const char* platformName, const int deviceType){
 	std::vector<cv::ocl::PlatformInfo> platformsInfo;
 	cv::ocl::getPlatfomsInfo(platformsInfo);
 	
+	
+
 	//find platform and device using PlatformInfo::platformVersion
 	std::vector<cv::ocl::PlatformInfo>::iterator itr = platformsInfo.begin();
 	for(; itr != platformsInfo.end(); itr++){
@@ -15,15 +17,20 @@ bool DeviceOcl::setDevice(const char* platformName, const int deviceType){
 			//platform found!
 			
 			for(int dev_cnt = 0; dev_cnt < pInfo.deviceNumber(); dev_cnt++){
-				cv::ocl::Device dev;
-				pInfo.getDevice(dev, dev_cnt);
-				if (dev.type() == deviceType){
+				cv::ocl::Device device;
+				
+				pInfo.getDevice(device, dev_cnt);
+				if (device.type() == deviceType){
+					device.set(device.ptr());
+					
 					cv::ocl::setUseOpenCL(true);
-					return true;
+					return cv::ocl::useOpenCL();
 				}
 			}
 		}
 	}
+	
+	cv::ocl::setUseOpenCL(false);
 	return false;
 }
 
@@ -38,11 +45,12 @@ bool DeviceOcl::setDevice(const int vendor, const int deviceType){
 		//platform found!
 
 		for (int dev_cnt = 0; dev_cnt < pInfo.deviceNumber(); dev_cnt++){
-			cv::ocl::Device dev;
-			pInfo.getDevice(dev, dev_cnt);
-			if (dev.type() == deviceType && dev.vendorID() == vendor){
+			cv::ocl::Device device;
+			pInfo.getDevice(device, dev_cnt);
+			if (device.type() == deviceType && device.vendorID() == vendor){
+				device.set(device.ptr());
 				cv::ocl::setUseOpenCL(true);
-				return true;
+				return cv::ocl::useOpenCL();
 			}
 		}
 		

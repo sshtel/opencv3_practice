@@ -7,8 +7,8 @@ FaceDetectorCpu::FaceDetectorCpu(std::string name){
 
 int FaceDetectorCpu::load(std::string path){
 	dataPath_ = path;
-	
 	if(	!face_classifier_.load(this->dataPath_)  ){
+		std::cout << "ERROR: Could not load classifier cascade: " << path << std::endl;
 		return -1;
 	}
 	return 0;
@@ -21,25 +21,23 @@ void FaceDetectorCpu::setSrcImg(cv::Mat &src, double scale){
 int FaceDetectorCpu::cutFace(){
 	
 	cv::cvtColor(matSrc_, matGray_, CV_BGR2GRAY);		
-	cv::equalizeHist(matGray_, matGray_);
-	cv::GaussianBlur(matGray_, matGray_, cv::Size(3, 3), 1, 1);
-	
-	std::vector<cv::Rect> faces;
-	
-	face_classifier_.detectMultiScale(matGray_, faces, 1.1, 
+	//cv::equalizeHist(matGray_, matGray_);
+	//cv::GaussianBlur(matGray_, matGray_, cv::Size(3, 3), 1, 1);
+		
+	face_classifier_.detectMultiScale(matGray_, faces_, 1.1, 
 										3,
 										CV_HAAR_SCALE_IMAGE,
 										cv::Size(150, 150));
 
-	for(int i=0; i<faces.size(); i++) {
-        cv::Point lb(faces[i].x + faces[i].width,
-                        faces[i].y + faces[i].height);
-        cv::Point tr(faces[i].x, faces[i].y);
+	for (int i = 0; i<faces_.size(); i++) {
+		cv::Point lb(faces_[i].x + faces_[i].width,
+			faces_[i].y + faces_[i].height);
+		cv::Point tr(faces_[i].x, faces_[i].y);
  
 		cv::rectangle(this->matSrc_, lb, tr, cv::Scalar(0,255,0), 3, 4, 0);
     }
 
-	if(faces.size() == 0) return -1;
+	if (faces_.size() == 0) return -1;
 	return 0;
 }
 

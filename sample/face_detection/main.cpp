@@ -17,9 +17,9 @@ using namespace cv;
 using namespace std;
 
 
-#define THREAD_NUM 1
+#define THREAD_NUM 4
 
-#define IMAGE_ROOT "..\\..\\..\\..\\images"
+#define IMAGE_ROOT "..\\..\\..\\images"
 #define VIDEO_VGA		IMAGE_ROOT"\\640x480_vga.mp4"
 #define VIDEO_1080p		IMAGE_ROOT"\\1080p.mp4"
 #define VIDEO_INPUT		VIDEO_VGA
@@ -115,7 +115,7 @@ void video_work_tapi(){
 		if (isCL) { detector = new FaceDetectorCL(str.c_str()); }
 		else{ detector = new FaceDetectorCpu(str.c_str()); }
 		
-		detector->setVideoFile(VIDEO_VGA);
+		detector->setVideoFile(VIDEO_1080p);
 		faceDetector.push_back(detector);
 		_beginthread(video_thread_CL, 0, detector);
 	}
@@ -138,18 +138,15 @@ int main(){
 	int vendor = cv::ocl::Device::VENDOR_AMD;
 
 	DeviceOcl devOcl;
-	clDeviceFound = devOcl.setDevice(platformName.c_str(), deviceType);
-		
-	//clDeviceFound = devOcl.setDevice(vendor, deviceType);
+	//clDeviceFound = devOcl.setDevice(platformName.c_str(), deviceType);
+	clDeviceFound = devOcl.setDevice(vendor, deviceType);
 	
-	cv::ocl::setUseOpenCL(clDeviceFound);
-	
-	/*
-	setThreadUseCL(clDeviceFound);
+	cv::ocl::setUseOpenCL(false);
+	setThreadUseCL(false);
 	video_work_tapi();
-	*/
+	
 	//image_work(clDeviceFound);
-	camera_work(clDeviceFound);
+	//camera_work(clDeviceFound);
 	
 	return 0;
 }

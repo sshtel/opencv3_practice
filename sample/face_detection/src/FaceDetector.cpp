@@ -17,3 +17,7 @@ int FaceDetector::doWork(){
 
 	return -1;
 }
+
+void FaceDetector::getResultFaces(std::vector<cv::Rect> &faces){
+	faces = faces_;
+}

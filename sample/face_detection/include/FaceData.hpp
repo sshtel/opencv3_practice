@@ -1,7 +1,7 @@
 #ifndef __FACE_DATA_H
 #define __FACE_DATA_H
 
-#define OPENCV_ROOT "..\\..\\..\\..\\opencv"
+#define OPENCV_ROOT "..\\..\\..\\opencv"
 
 //#define HAAR_FRONT_FACE_DEFAULT_DATA		"..\\..\\..\\..\\opencv\\data\\haarcascades\\haarcascade_frontalface_default.xml"
 #define HAAR_FRONT_FACE_DEFAULT_DATA		OPENCV_ROOT"\\data\\haarcascades\\haarcascade_frontalface_default.xml"

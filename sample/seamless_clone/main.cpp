@@ -4,7 +4,6 @@
 #include <opencv2/highgui.hpp>
 
 #ifdef WIN32
-#include <WorkThreadWin32.hpp>
 #include <windows.h>
 #include <process.h>
 #include <stdlib.h>

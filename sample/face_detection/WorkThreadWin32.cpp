@@ -41,7 +41,7 @@ void video_thread_CL(void* pParams)
 	//HAAR_FRONT_FACE_DEFAULT_DATA
 	//LBP_FRONTAL_FACE
 	//LBP_PROFILE_FACE
-	faceDetector->load(HAAR_EYE_TREE_EYEGLASSES_DATA);
+	faceDetector->load(HAAR_FRONT_FACE_DEFAULT_DATA);
 
 	VideoCapture videoCapture;
 	cv::Mat frame, frameCopy, image;
@@ -49,22 +49,28 @@ void video_thread_CL(void* pParams)
 	videoCapture.open(faceDetector->videoFile().c_str());
 	if (!videoCapture.isOpened()) { cout << "No video detected" << endl; return; }
 
-	cv::namedWindow(name.c_str(), 1);
+	//cv::namedWindow(name.c_str(), 1);
 
 	unsigned int count = 0;
-
+	std::vector<cv::Rect> faces_result;
 	if (videoCapture.isOpened())
 	{
 		cout << "In capture ..." << name.c_str() << endl;
 		for (;;)
 		{
 			count++;
-			if (!videoCapture.grab()) continue;
-			videoCapture.retrieve(frame, 0);
+			if (!videoCapture.grab()) { break; }
+			if (!videoCapture.retrieve(frame, 0)) { break; }
 
 			faceDetector->setSrcImg(frame, 1);
 			faceDetector->doWork();
-			cv::imshow(name.c_str(), faceDetector->resultMat());
+			//cv::imshow(name.c_str(), faceDetector->resultMat());
+			faceDetector->getResultFaces(faces_result);
+			std::cout << "face --" << name.c_str() << std::endl;
+			for (int i = 0; i < faces_result.size(); ++i){
+				std::cout << faces_result.at(i).x << ", " << faces_result.at(i).y << std::endl;
+			}
+			
 
 			if (waitKey(10) >= 0){
 				videoCapture.release();
@@ -74,9 +80,8 @@ void video_thread_CL(void* pParams)
 			Sleep(1);
 		}
 	}
-	waitKey(0);
-
-	cvDestroyWindow(name.c_str());
+	
+	//cvDestroyWindow(name.c_str());
 	_endthread();
 	return;
 

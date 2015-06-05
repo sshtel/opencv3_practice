@@ -1,8 +1,7 @@
 #ifndef __CASCADE_CLASSIFIER_H
 #define __CASCADE_CLASSIFIER_H
 
-#include <opencv/cv.h>
-#include <opencv/highgui.h>
+#include <opencv2/opencv.hpp>
 
 class FaceDetector{
 
@@ -10,7 +9,8 @@ protected:
 	std::string name_;
 	std::string videoFile_;
 	std::string dataPath_;
-
+	cv::CascadeClassifier face_classifier_;
+	std::vector<cv::Rect> faces_;
 public:
 	std::string name() { return name_; }
 	std::string videoFile() { return videoFile_; }
@@ -24,7 +24,7 @@ public:
 	virtual int cutEyes() = 0;
 
 	virtual cv::Mat& resultMat() = 0;
-	
+	void getResultFaces(std::vector<cv::Rect> &faces);
 };
 
 #endif

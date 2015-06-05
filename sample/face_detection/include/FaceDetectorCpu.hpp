@@ -14,14 +14,13 @@ private:
 	cv::Mat matGray_;
 
 	bool isGray(cv::Mat &src);
-	cv::CascadeClassifier face_classifier_;
+	
 public:
 	explicit FaceDetectorCpu(std::string name);
 	
 
 	int load(std::string path);
 	void setSrcImg(cv::Mat &src, double scale);
-
 	int cutFace();
 	int cutEyes();
 
@@ -33,8 +32,7 @@ public:
 		cv::imshow("show", img);
 		cv::waitKey(0);
 	}
-
-
+	
 };
 
 

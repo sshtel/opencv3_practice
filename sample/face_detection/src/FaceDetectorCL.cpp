@@ -21,22 +21,22 @@ void FaceDetectorCL::setSrcImg(cv::Mat &src, double scale){
 
 int FaceDetectorCL::cutFace(){
     cv::cvtColor( umatSrc_, umatGray_, CV_BGR2GRAY );
-	cv::equalizeHist(umatGray_, umatGray_);
-	cv::GaussianBlur(umatGray_, umatGray_, cv::Size(3, 3), 1, 1);
+	//cv::equalizeHist(umatGray_, umatGray_);
+	//cv::GaussianBlur(umatGray_, umatGray_, cv::Size(3, 3), 1, 1);
 
-	std::vector<cv::Rect> faces;
-	face_classifier_.detectMultiScale(umatGray_, faces, 1.1,
+	
+	face_classifier_.detectMultiScale(umatGray_, faces_, 1.1,
 		3,
 		CV_HAAR_SCALE_IMAGE,
 		cv::Size(150, 150));
-	
-	for(int i=0; i<faces.size(); i++) {
-        cv::Point lb(faces[i].x + faces[i].width,
-                        faces[i].y + faces[i].height);
-        cv::Point tr(faces[i].x, faces[i].y);
+
+	for (int i = 0; i<faces_.size(); i++) {
+		cv::Point lb(faces_[i].x + faces_[i].width,
+			faces_[i].y + faces_[i].height);
+		cv::Point tr(faces_[i].x, faces_[i].y);
  		cv::rectangle(this->matSrc_, lb, tr, cv::Scalar(0,255,0), 3, 4, 0);
     }
-	
+	if (faces_.size() == 0) return -1;
 	return 0;
 }
 

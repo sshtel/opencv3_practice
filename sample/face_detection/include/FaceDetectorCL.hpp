@@ -14,10 +14,7 @@ private:
 	cv::UMat umatGray_;
 	
 	bool isGray(cv::Mat &src);
-
-	cv::CascadeClassifier face_classifier_;
 	
-
 public:
 	explicit FaceDetectorCL(std::string name);
 	
@@ -27,7 +24,7 @@ public:
 	int cutFace();
 	int cutEyes();
 	
-	virtual cv::Mat& resultMat() { return this->matSrc_; }
+	cv::Mat& resultMat() { return this->matSrc_; }
 
 	void showImage(cv::Mat &mat)
 	{
