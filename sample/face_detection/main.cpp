@@ -100,7 +100,9 @@ void image_work(bool isCL){
 	cv::waitKey(0);
 }
 
-void video_work_tapi(){
+void video_work_tapi(bool isCL){
+	setThreadUseCL(isCL);
+
 	int count = THREAD_NUM;
 	std::vector<FaceDetector*> faceDetector;
 	
@@ -128,22 +130,32 @@ void video_work_tapi(){
 }
 
 int main(){
-
-	//cv::ocl::setDevice function (with cv::ocl::getOpenCLPlatforms and cv::ocl::getOpenCLDevices).
-	bool clDeviceFound = false;
+	bool clDeviceFound = true;
 
 	std::string platformName = "AMD";
 	//std::string platformName = "Intel";
-	int deviceType = cv::ocl::Device::TYPE_GPU;
-	int vendor = cv::ocl::Device::VENDOR_AMD;
+	int deviceType;
+	int vendor;
+	cv::String vendorName;
 
+	cv::ocl::Device device = cv::ocl::Device::getDefault();
+	vendorName = device.vendorName();
+	deviceType = device.type();
+	std::cout << "Vendor : " << vendorName.c_str() << std::endl;
+	std::cout << "type  : " << deviceType << std::endl;
+
+
+	deviceType = cv::ocl::Device::TYPE_GPU;
+	vendor = cv::ocl::Device::VENDOR_INTEL;
 	DeviceOcl devOcl;
 	//clDeviceFound = devOcl.setDevice(platformName.c_str(), deviceType);
 	clDeviceFound = devOcl.setDevice(vendor, deviceType);
-	
-	cv::ocl::setUseOpenCL(false);
-	setThreadUseCL(false);
-	video_work_tapi();
+
+	if(0){
+		cv::ocl::setUseOpenCL(false);  //for CL OFF test
+		clDeviceFound = false;
+	}
+	video_work_tapi(clDeviceFound);
 	
 	//image_work(clDeviceFound);
 	//camera_work(clDeviceFound);

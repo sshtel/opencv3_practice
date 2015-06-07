@@ -1,4 +1,5 @@
 #include <opencv2/core/ocl.hpp>
+#include <iostream>
 #include "device_ocl.h"
 
 bool DeviceOcl::setDevice(const char* platformName, const int deviceType){
@@ -18,11 +19,12 @@ bool DeviceOcl::setDevice(const char* platformName, const int deviceType){
 			
 			for(int dev_cnt = 0; dev_cnt < pInfo.deviceNumber(); dev_cnt++){
 				cv::ocl::Device device;
-				
 				pInfo.getDevice(device, dev_cnt);
+				
 				if (device.type() == deviceType){
 					device.set(device.ptr());
-					
+					std::cout << "Vendor : " << device.vendorName() << std::endl;
+					std::cout << "Type : " << device.type() << std::endl;
 					cv::ocl::setUseOpenCL(true);
 					return cv::ocl::useOpenCL();
 				}
@@ -49,6 +51,8 @@ bool DeviceOcl::setDevice(const int vendor, const int deviceType){
 			pInfo.getDevice(device, dev_cnt);
 			if (device.type() == deviceType && device.vendorID() == vendor){
 				device.set(device.ptr());
+				std::cout << "Vendor : " << device.vendorName() << std::endl;
+				std::cout << "Type : " << device.type() << std::endl;
 				cv::ocl::setUseOpenCL(true);
 				return cv::ocl::useOpenCL();
 			}

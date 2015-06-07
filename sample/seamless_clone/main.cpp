@@ -68,6 +68,10 @@ int main(){
 	int deviceType = cv::ocl::Device::TYPE_GPU;
 	int vendor = cv::ocl::Device::VENDOR_AMD;
 
+	cv::ocl::Device device = ::ocl::Device::getDefault();
+	cv::String vendorName = device.vendorName();
+	int type = device.type();
+
 	DeviceOcl devOcl;
 	clDeviceFound = devOcl.setDevice(vendor, deviceType);
 	
