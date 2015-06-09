@@ -62,3 +62,27 @@ bool DeviceOcl::setDevice(const int vendor, const int deviceType){
 	cv::ocl::setUseOpenCL(false);
 	return false;
 }
+
+
+bool DeviceOcl::checkDevice(const int vendor, const int deviceType){
+	cv::ocl::Device device = cv::ocl::Device::getDefault();
+	int default_vendor = device.vendorID();
+	int default_type = device.type();
+	cv::String typeName;
+	switch (default_type){
+		case  cv::ocl::Device::TYPE_CPU: typeName = "CPU"; break;
+		case  cv::ocl::Device::TYPE_GPU: typeName = "GPU"; break;
+		case  cv::ocl::Device::TYPE_ACCELERATOR: typeName = "ACCELERATOR"; break;
+		case  cv::ocl::Device::TYPE_IGPU: typeName = "IGPU"; break;
+		case  cv::ocl::Device::TYPE_DGPU: typeName = "DGPU"; break;
+		case  cv::ocl::Device::TYPE_ALL: typeName = "ALL"; break;
+	}
+
+	std::cout << "Vendor : " << device.vendorName().c_str() << std::endl;
+	std::cout << "Vendor ID : " << default_vendor << std::endl;
+	std::cout << "type  : " << typeName.c_str() << std::endl;
+	std::cout << "type ID : " << default_type << std::endl;
+
+	if (vendor == default_vendor && deviceType == default_type) { return true;  }
+	return false;
+}

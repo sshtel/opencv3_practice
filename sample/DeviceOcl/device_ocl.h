@@ -8,7 +8,7 @@ public:
 	bool setDevice(const char* platformName, const int deviceType);
 	
 	bool setDevice(const int vendor, const int deviceType);
-	
+	bool checkDevice(const int vendor, const int deviceType);
 };
 
 
