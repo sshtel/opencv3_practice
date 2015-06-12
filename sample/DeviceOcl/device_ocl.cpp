@@ -50,6 +50,13 @@ bool DeviceOcl::setDevice(const int vendor, const int deviceType){
 			cv::ocl::Device device;
 			pInfo.getDevice(device, dev_cnt);
 			if (device.type() == deviceType && device.vendorID() == vendor){
+				/*
+				cv::ocl::setDevice(); functions is not provided in v3.0.0
+				environment variables are used to choose OpenCL devices instead.
+				EX)
+				OPENCV_OPENCL_DEVICE=:GPU:0
+				*/
+
 				device.set(device.ptr());
 				std::cout << "Vendor : " << device.vendorName() << std::endl;
 				std::cout << "Type : " << device.type() << std::endl;
@@ -64,7 +71,7 @@ bool DeviceOcl::setDevice(const int vendor, const int deviceType){
 }
 
 
-bool DeviceOcl::checkDevice(const int vendor, const int deviceType){
+bool DeviceOcl::checkDefaultDevice(const int vendor, const int deviceType){
 	cv::ocl::Device device = cv::ocl::Device::getDefault();
 	int default_vendor = device.vendorID();
 	int default_type = device.type();
