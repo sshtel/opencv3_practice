@@ -9,13 +9,15 @@ int main(){
 	int vendor;
 	bool clDeviceFound = false;
 	
-	cv::ocl::Device device = cv::ocl::Device::getDefault();
-	vendorName = device.vendorName();
-	deviceType = device.type();
+	/*
+	set environment variables before run this program.
+	OpenCV 3.0 does not provide cv::ocl::setDevice() API
+	EX)
+	OPENCV_OPENCL_DEVICE=:CPU:0
+	OPENCV_OPENCL_DEVICE=:GPU:0
+	OPENCV_OPENCL_DEVICE=:GPU:1
 
-	std::cout << "Vendor : " << vendorName.c_str() << std::endl;
-	std::cout << "type  : " << deviceType << std::endl;
-	
+	*/
 
 	std::string platformName = "AMD";
 	//std::string platformName = "Intel";
@@ -23,8 +25,8 @@ int main(){
 	vendor = cv::ocl::Device::VENDOR_AMD;
 
 	DeviceOcl devOcl;
-	//clDeviceFound = devOcl.setDevice(platformName.c_str(), deviceType);
-	clDeviceFound = devOcl.setDevice(vendor, deviceType);
-	
+	if (devOcl.checkDefaultDevice(vendor, deviceType)) {
+		std::cout << " check device OK" << std::endl;
+	}
 	return 0;
 }

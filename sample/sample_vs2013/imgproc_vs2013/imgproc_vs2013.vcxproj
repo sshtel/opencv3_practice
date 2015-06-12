@@ -160,6 +160,7 @@
     <ClCompile Include="..\..\imgproc\WorkThreadWin32.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\DeviceOcl\auto_etr.h" />
     <ClInclude Include="..\..\DeviceOcl\device_ocl.h" />
     <ClInclude Include="..\..\imgproc\WorkThreadWin32.hpp" />
   </ItemGroup>
