@@ -21,15 +21,56 @@ void setThreadUseCL(bool isCL){
 }
 bool isThreadUseCL(){ return threadUseCL; }
 
+
+int finishTaskFlag;
+int finishedTaskCount(){
+	return finishTaskFlag;
+}
+
+
+
+#define LOOP_COUNT 30
+
+void sobel_thread_CL(void* pParams)
+{
+	char *filename = (char*)pParams;
+
+	for (int i = 0; i < LOOP_COUNT; ++i){
+
+		cv::Mat img = cv::imread(filename);
+
+		UMat uSrc = img.getUMat(ACCESS_READ);
+		UMat uGray;
+		UMat uGrad_X, uGrad_Y;
+		UMat abs_grad_x, abs_grad_y;
+		UMat grad;
+		Mat dst;
+
+		GaussianBlur(uSrc, uSrc, Size(3, 3), 0, 0, BORDER_DEFAULT);
+
+		cvtColor(uSrc, uGray, CV_BGR2GRAY);
+		cv::Sobel(uGray, uGrad_X, CV_16S, 1, 0, 3);
+		cv::Sobel(uGray, uGrad_Y, CV_16S, 0, 1, 3);
+
+		convertScaleAbs(uGrad_X, abs_grad_x);
+		convertScaleAbs(uGrad_Y, abs_grad_y);
+
+		addWeighted(abs_grad_x, 0.5, abs_grad_y, 0.5, 0, grad);
+
+		//grad.copyTo(dst);
+
+		{
+			//imshow("", dst);
+			//cv::waitKey(0);
+		}
+		//cv::imwrite(BIG_IMAGE_ROOT"\\sobel_out.jpg", dst);
+	}
+
+	finishTaskFlag++;
+}
+
 void video_thread_CL(void* pParams)
 {
-	
-	//HAAR_EYE_TREE_EYEGLASSES_DATA
-	//HAAR_EYE_DATA
-	//HAAR_FRONT_FACE_DEFAULT_DATA
-	//LBP_FRONTAL_FACE
-	//LBP_PROFILE_FACE
-	
 	VideoCapture videoCapture;
 	cv::Mat frame, frameCopy, image;
 
