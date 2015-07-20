@@ -88,8 +88,6 @@ void video_thread_CL(void* pParams)
 			if (!videoCapture.grab()) { break; }
 			if (!videoCapture.retrieve(frame, 0)) { break; }
 
-			
-
 			if (waitKey(10) >= 0){
 				videoCapture.release();
 				break;
