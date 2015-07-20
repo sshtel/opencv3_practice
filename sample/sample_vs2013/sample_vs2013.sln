@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imgproc_vs2013", "imgproc_v
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "seamless_clone_vs2013", "seamless_clone_vs2013\seamless_clone_vs2013.vcxproj", "{ACF4494E-AD83-438B-908E-CF88AEFA47A5}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pedestrian_detection", "pedestrian_detection\pedestrian_detector.vcxproj", "{C8DC7D97-5EFC-4D5E-A4FD-AE9B7A714EE4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -69,6 +71,18 @@ Global
 		{ACF4494E-AD83-438B-908E-CF88AEFA47A5}.Release|Win32.Build.0 = Release|Win32
 		{ACF4494E-AD83-438B-908E-CF88AEFA47A5}.Release|x64.ActiveCfg = Release|x64
 		{ACF4494E-AD83-438B-908E-CF88AEFA47A5}.Release|x64.Build.0 = Release|x64
+		{C8DC7D97-5EFC-4D5E-A4FD-AE9B7A714EE4}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{C8DC7D97-5EFC-4D5E-A4FD-AE9B7A714EE4}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{C8DC7D97-5EFC-4D5E-A4FD-AE9B7A714EE4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C8DC7D97-5EFC-4D5E-A4FD-AE9B7A714EE4}.Debug|Win32.Build.0 = Debug|Win32
+		{C8DC7D97-5EFC-4D5E-A4FD-AE9B7A714EE4}.Debug|x64.ActiveCfg = Debug|x64
+		{C8DC7D97-5EFC-4D5E-A4FD-AE9B7A714EE4}.Debug|x64.Build.0 = Debug|x64
+		{C8DC7D97-5EFC-4D5E-A4FD-AE9B7A714EE4}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{C8DC7D97-5EFC-4D5E-A4FD-AE9B7A714EE4}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{C8DC7D97-5EFC-4D5E-A4FD-AE9B7A714EE4}.Release|Win32.ActiveCfg = Release|Win32
+		{C8DC7D97-5EFC-4D5E-A4FD-AE9B7A714EE4}.Release|Win32.Build.0 = Release|Win32
+		{C8DC7D97-5EFC-4D5E-A4FD-AE9B7A714EE4}.Release|x64.ActiveCfg = Release|x64
+		{C8DC7D97-5EFC-4D5E-A4FD-AE9B7A714EE4}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

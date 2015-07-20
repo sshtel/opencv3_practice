@@ -27,6 +27,7 @@
     <ClCompile Include="..\..\face_detection\WorkThreadWin32.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\DeviceOcl\auto_etr.h" />
     <ClInclude Include="..\..\DeviceOcl\device_ocl.h" />
     <ClInclude Include="..\..\face_detection\include\FaceData.hpp" />
     <ClInclude Include="..\..\face_detection\include\FaceDetector.hpp" />
