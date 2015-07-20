@@ -26,5 +26,8 @@
     <ClInclude Include="..\..\DeviceOcl\device_ocl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\imgproc\WorkThreadWin32.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
