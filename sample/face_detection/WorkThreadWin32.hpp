@@ -3,7 +3,12 @@
 
 void display_thread(void* params);
 void video_thread_CL(void* pParams);
+
 void setThreadUseCL(bool isCL);
 bool isThreadUseCL();
+void setImgShow(bool isImgShow);
+bool isImgShow();
+
+int finishedTaskCount();
 
 #endif

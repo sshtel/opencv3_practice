@@ -13,6 +13,8 @@
 #include <stdlib.h>
 #endif
 
+#include <auto_etr.h>
+
 using namespace cv;
 using namespace std;
 
@@ -101,64 +103,64 @@ void image_work(bool isCL){
 }
 
 void video_work_tapi(bool isCL){
-	setThreadUseCL(isCL);
-
-	int count = THREAD_NUM;
-	std::vector<FaceDetector*> faceDetector;
 	
-	for (int i = 0; i<count; i++){
-		std::string str = "face";
-		char num[5];
-		_itoa(i, num, 10);
-		str += num;
-		FaceDetector *detector;
+	int start_t, end_t;
+	{
+		AutoETR autoETR("video work", start_t, end_t);
+		setThreadUseCL(isCL);
 
-		bool isCL = isThreadUseCL();
-		if (isCL) { detector = new FaceDetectorCL(str.c_str()); }
-		else{ detector = new FaceDetectorCpu(str.c_str()); }
-		
-		detector->setVideoFile(VIDEO_1080p);
-		faceDetector.push_back(detector);
-		_beginthread(video_thread_CL, 0, detector);
-	}
+		int count = THREAD_NUM;
+		std::vector<FaceDetector*> faceDetector;
 
-	while (1){
-		Sleep(1000);
-		if (waitKey(10) >= 0){ break; }
+		for (int i = 0; i < count; i++){
+			std::string str = "face";
+			char num[5];
+			_itoa(i, num, 10);
+			str += num;
+			FaceDetector *detector;
+
+			bool isCL = isThreadUseCL();
+			if (isCL) { detector = new FaceDetectorCL(str.c_str()); }
+			else{ detector = new FaceDetectorCpu(str.c_str()); }
+
+			detector->setVideoFile(VIDEO_1080p);
+			faceDetector.push_back(detector);
+			_beginthread(video_thread_CL, 0, detector);
+		}
+
+		while (1){
+			Sleep(10);
+			if (finishedTaskCount() >= THREAD_NUM) { break; }
+			if (waitKey(10) >= 0){ break; }
+		}
 	}
+	std::cout << "start time : " << start_t << std::endl;
+	std::cout << "end time : " << end_t << std::endl;
+
 	return;
 }
 
-int main(){
+
+
+
+int main(int argc, char *argv[]){
 	bool clDeviceFound = true;
 
-	std::string platformName = "AMD";
-	//std::string platformName = "Intel";
-	int deviceType;
-	int vendor;
+	int deviceType = cv::ocl::Device::TYPE_GPU;
+	int vendor = cv::ocl::Device::VENDOR_AMD;
 	cv::String vendorName;
-
-	cv::ocl::Device device = cv::ocl::Device::getDefault();
-	vendorName = device.vendorName();
-	deviceType = device.type();
-	std::cout << "Vendor : " << vendorName.c_str() << std::endl;
-	std::cout << "type  : " << deviceType << std::endl;
-
-
-	deviceType = cv::ocl::Device::TYPE_GPU;
-	vendor = cv::ocl::Device::VENDOR_INTEL;
 	DeviceOcl devOcl;
-	//clDeviceFound = devOcl.setDevice(platformName.c_str(), deviceType);
-	clDeviceFound = devOcl.setDevice(vendor, deviceType);
+	clDeviceFound = devOcl.checkDefaultDevice(vendor, deviceType);
 
 	if(0){
 		cv::ocl::setUseOpenCL(false);  //for CL OFF test
 		clDeviceFound = false;
 	}
-	video_work_tapi(clDeviceFound);
+	setImgShow(false);
+	//video_work_tapi(clDeviceFound);
 	
 	//image_work(clDeviceFound);
-	//camera_work(clDeviceFound);
+	camera_work(clDeviceFound);
 	
 	return 0;
 }

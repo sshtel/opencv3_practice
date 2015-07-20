@@ -25,6 +25,7 @@ public:
 
 	virtual cv::Mat& resultMat() = 0;
 	void getResultFaces(std::vector<cv::Rect> &faces);
+	std::vector<cv::Rect>& getResultFaces(){ return faces_; }
 };
 
 #endif

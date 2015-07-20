@@ -24,11 +24,13 @@ int FaceDetectorCL::cutFace(){
 	//cv::equalizeHist(umatGray_, umatGray_);
 	//cv::GaussianBlur(umatGray_, umatGray_, cv::Size(3, 3), 1, 1);
 
-	
+	/*
 	face_classifier_.detectMultiScale(umatGray_, faces_, 1.1,
 		3,
 		CV_HAAR_SCALE_IMAGE,
 		cv::Size(150, 150));
+	*/
+	face_classifier_.detectMultiScale(umatGray_, faces_, 1.1, 3, CV_HAAR_SCALE_IMAGE);
 
 	for (int i = 0; i<faces_.size(); i++) {
 		cv::Point lb(faces_[i].x + faces_[i].width,

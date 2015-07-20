@@ -26,13 +26,6 @@ public:
 
 	cv::Mat& resultMat() { return this->matSrc_; }
 	
-	void showImage(cv::Mat &mat)
-	{
-		cv::Mat img(mat);
-		cv::imshow("show", img);
-		cv::waitKey(0);
-	}
-	
 };
 
 

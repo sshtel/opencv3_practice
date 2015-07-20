@@ -19,5 +19,5 @@ int FaceDetector::doWork(){
 }
 
 void FaceDetector::getResultFaces(std::vector<cv::Rect> &faces){
-	faces = faces_;
+	faces.swap(faces_);
 }
