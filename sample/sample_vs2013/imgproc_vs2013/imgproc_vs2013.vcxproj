@@ -158,12 +158,14 @@
     <ClCompile Include="..\..\DeviceOcl\device_ocl.cpp" />
     <ClCompile Include="..\..\imgproc\histogram.cpp" />
     <ClCompile Include="..\..\imgproc\main.cpp" />
+    <ClCompile Include="..\..\imgproc\tone_mapping.cpp" />
     <ClCompile Include="..\..\imgproc\WorkThreadWin32.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\DeviceOcl\auto_etr.h" />
     <ClInclude Include="..\..\DeviceOcl\device_ocl.h" />
     <ClInclude Include="..\..\imgproc\histogram.hpp" />
+    <ClInclude Include="..\..\imgproc\tone_mapping.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
