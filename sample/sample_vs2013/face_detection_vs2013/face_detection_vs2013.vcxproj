@@ -34,6 +34,7 @@
     <ClInclude Include="..\..\face_detection\include\FaceDetectorCL.hpp" />
     <ClInclude Include="..\..\face_detection\include\FaceDetectorCpu.hpp" />
     <ClInclude Include="..\..\face_detection\WorkThreadWin32.hpp" />
+    <ClInclude Include="..\..\tools\common_directory.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5377DF97-49B0-47E2-81BD-53FBFE339CBD}</ProjectGuid>
@@ -118,9 +119,9 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;OPENCV_OPENCL_DEVICE:GPU:1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\opencv\include;..\..\DeviceOcl;..\..\face_detection\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\opencv\include;..\..\DeviceOcl;..\..\face_detection\include;..\..\tools;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -157,7 +158,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\..\opencv\include;..\..\face_detection\include;..\..\DeviceOcl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\opencv\include;..\..\face_detection\include;..\..\DeviceOcl;..\..\tools;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

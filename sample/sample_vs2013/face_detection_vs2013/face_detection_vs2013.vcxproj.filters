@@ -56,5 +56,8 @@
     <ClInclude Include="..\..\DeviceOcl\auto_etr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\tools\common_directory.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

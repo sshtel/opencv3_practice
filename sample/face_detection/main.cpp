@@ -2,6 +2,7 @@
 #include <FaceDetectorCpu.hpp>
 #include <FaceDetectorCL.hpp>
 #include <device_ocl.h>
+#include <common_directory.hpp>
 
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui.hpp>
@@ -19,26 +20,18 @@ using namespace cv;
 using namespace std;
 
 
-#define THREAD_NUM 4
+#define THREAD_NUM 1
 
 #define IMAGE_ROOT "..\\..\\..\\images"
-#define VIDEO_VGA		IMAGE_ROOT"\\640x480_vga.mp4"
-#define VIDEO_1080p		IMAGE_ROOT"\\1080p.mp4"
-#define VIDEO_INPUT		VIDEO_VGA
 
-
-void camera_work(bool isCL){
+void camera_work(bool isCL, std::string training_data_path){
 
 	FaceDetector *detector;
 	if (isCL) { detector = new FaceDetectorCL("face_single_CL");	}
 	else{ detector = new FaceDetectorCpu("face_single_cpu"); }
 	
-	//HAAR_EYE_TREE_EYEGLASSES_DATA
-	//HAAR_EYE_DATA
-	//HAAR_FRONT_FACE_DEFAULT_DATA
-	//LBP_FRONTAL_FACE
-	//LBP_PROFILE_FACE
-	detector->load(HAAR_FRONT_FACE_DEFAULT_DATA);
+
+	detector->load(training_data_path);
 
 	VideoCapture videoCapture;
     cv::Mat frame,frameCopy, image;
@@ -82,9 +75,9 @@ void camera_work(bool isCL){
 #define FACE_IMG_04 IMAGE_ROOT"\\face04.jpg"
 #define FACE_IMG_LENA IMAGE_ROOT"\\lena.jpg"
 
-void image_work(bool isCL){
+void image_work(bool isCL, std::string training_data_path, ::string image_path){
 	
-	cv::Mat img = cv::imread(FACE_IMG_04);
+	cv::Mat img = cv::imread(image_path);
 
 	FaceDetector *detector;
 	if (isCL) {
@@ -95,14 +88,20 @@ void image_work(bool isCL){
 	}
 	
 	cv::Mat matDst;
-	detector->load(HAAR_FRONT_FACE_DEFAULT_DATA);
+	detector->load(training_data_path);
 	detector->setSrcImg(img, 1);
 	detector->doWork();
 	cv::imshow("result", detector->resultMat());
 	cv::waitKey(0);
 }
 
-void video_work_tapi(bool isCL){
+
+#define VIDEO_VGA		IMAGE_ROOT"\\640x480_vga.mp4"
+#define VIDEO_1080p		IMAGE_ROOT"\\1080p.mp4"
+#define VIDEO_INPUT		VIDEO_VGA
+
+
+void video_work(bool isCL, std::string training_data_path, std::string filepath){
 	
 	int start_t, end_t;
 	{
@@ -123,7 +122,8 @@ void video_work_tapi(bool isCL){
 			if (isCL) { detector = new FaceDetectorCL(str.c_str()); }
 			else{ detector = new FaceDetectorCpu(str.c_str()); }
 
-			detector->setVideoFile(VIDEO_1080p);
+			detector->load(training_data_path);
+			detector->setVideoFile(filepath);
 			faceDetector.push_back(detector);
 			_beginthread(video_thread_CL, 0, detector);
 		}
@@ -156,11 +156,56 @@ int main(int argc, char *argv[]){
 		cv::ocl::setUseOpenCL(false);  //for CL OFF test
 		clDeviceFound = false;
 	}
-	setImgShow(false);
-	//video_work_tapi(clDeviceFound);
-	
-	//image_work(clDeviceFound);
-	camera_work(clDeviceFound);
+	setImgShow(true);
+
+
+	if (argc < 2){
+		//video_work(true, HAAR_FRONT_FACE_DEFAULT_DATA, VIDEO_VGA);
+		//image_work(true, FACE_IMG_01);
+		camera_work(true, HAAR_FRONT_FACE_DEFAULT_DATA);
+	}
+	else{
+		std::string argv_str(argv[1]);
+		std::string data_str(argv[2]);
+		if (argv_str == "camera") {
+			camera_work(clDeviceFound, data_str);
+		}
+		else if (argv_str == "image") {
+			std::string path_str(argv[3]);
+			char cCurrentPath[FILENAME_MAX];
+			if (!GetCurrentDir(cCurrentPath, sizeof(cCurrentPath)))
+			{
+				return errno;
+			}
+			std::string path;
+			path += cCurrentPath;
+			path += "\\";
+			path += path_str;
+			std::cout << "filepath : " << path_str.c_str() << std::endl;
+			image_work(clDeviceFound, data_str, path);
+		}
+		else if (argv_str == "video") {
+			std::string path_str(argv[3]);
+			char cCurrentPath[FILENAME_MAX];
+			if (!GetCurrentDir(cCurrentPath, sizeof(cCurrentPath)))
+			{
+				return errno;
+			}
+			std::string path;
+			path += cCurrentPath;
+			path += "\\";
+			path += path_str;
+			std::cout << "filepath : " << path_str.c_str() << std::endl;
+			video_work(clDeviceFound, data_str, path);
+		}
+	}
+
+
+
+
+
+
+
 	
 	return 0;
 }
