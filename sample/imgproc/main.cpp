@@ -11,16 +11,12 @@
 #include <stdlib.h>
 #endif
 
+#include "histogram.hpp"
+
+
 using namespace cv;
 using namespace std;
 
-
-
-#define IMAGE_ROOT "..\\..\\..\\images"
-#define BIG_IMAGE_ROOT "..\\..\\..\\images\\big"
-#define VIDEO_VGA		IMAGE_ROOT"\\640x480_vga.mp4"
-#define VIDEO_1080p		IMAGE_ROOT"\\1080p.mp4"
-#define VIDEO_INPUT		VIDEO_VGA
 
 
 void camera_work(bool isCL){
@@ -56,18 +52,6 @@ void camera_work(bool isCL){
     return ;
 }
 
-
-#define FACE_IMG_01 IMAGE_ROOT"\\face01.jpg"
-#define FACE_IMG_02 IMAGE_ROOT"\\face02.jpg"
-#define FACE_IMG_03 IMAGE_ROOT"\\face03.jpg"
-#define FACE_IMG_04 IMAGE_ROOT"\\face04.jpg"
-#define FACE_IMG_LENA IMAGE_ROOT"\\lena.jpg"
-
-#define BIG_HELICOPTER BIG_IMAGE_ROOT"\\helicopter.jpg"
-#define BIG_LANDSCAPE1 BIG_IMAGE_ROOT"\\landscape1.jpg"
-#define BIG_LANDSCAPE2 BIG_IMAGE_ROOT"\\landscape2.jpg"
-#define BIG_LANDSCAPE3 BIG_IMAGE_ROOT"\\landscape3.png"
-#define BIG_PIGEONS BIG_IMAGE_ROOT"\\pigeons.jpg"
 
 void image_work(cv::String imgFile){
 
@@ -139,12 +123,12 @@ void image_work_multitasking(cv::String imgFile){
 }
 
 int main(){
-	DeviceOcl devOcl;
-	bool clDeviceFound = devOcl.checkDefaultDevice(cv::ocl::Device::VENDOR_AMD, cv::ocl::Device::TYPE_GPU);
-
-	cv::ocl::setUseOpenCL(true);
 	//image_work(BIG_LANDSCAPE1);
-	image_work_multitasking(BIG_LANDSCAPE1);
-	
+	//image_work_multitasking(BIG_LANDSCAPE1);
+	//hist_equ_sample();
+	//clahe_sample();
+	//gamma_correction_sample();
+
+	brightness_sample();
 	return 0;
 }
