@@ -96,6 +96,10 @@ void image_work(bool isCL, std::string training_data_path, ::string image_path){
 }
 
 
+
+// you can download video sample here
+// https://www.youtube.com/watch?v=ZwHXTFiaXKg&list=PLLdgPpcvAObDlkK3AAWaUohc3c97ex3Mr&index=1
+
 #define VIDEO_VGA		IMAGE_ROOT"\\640x480_vga.mp4"
 #define VIDEO_1080p		IMAGE_ROOT"\\1080p.mp4"
 #define VIDEO_INPUT		VIDEO_VGA
