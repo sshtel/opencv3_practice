@@ -15,8 +15,6 @@
 #endif
 
 #define IMAGE_ROOT "..\\..\\..\\images"
-#define HOG_IMG IMAGE_ROOT"\\hog_1.jpg"
-#define HOG_VID IMAGE_ROOT"\\pedestrian.mp4"
 
 #define HOG_VID_01 IMAGE_ROOT"\\pedestrian\\pedestrian01.mp4"
 #define HOG_VID_02 IMAGE_ROOT"\\pedestrian\\pedestrian02.mp4"
@@ -47,7 +45,7 @@ void mog2_sample1()
 
 	cv::VideoCapture vc;
 	{
-		vc.open(3);
+		vc.open(2);
 		if (!vc.isOpened())
 			throw runtime_error(string("can't open video file: "));
 		vc >> frame;
@@ -122,7 +120,7 @@ void mog2_and_knn()
 	pKNN = cv::createBackgroundSubtractorKNN();
 	pMOG2 = cv::createBackgroundSubtractorMOG2();
 
-	char fileName[200] = HOG_VID_03; //Gate1_175_p1.avi"; //mm2.avi"; //";//_p1.avi";  
+	char fileName[200] = HOG_VID_08;
 
 	cv::VideoCapture vc;
 	{
@@ -132,6 +130,8 @@ void mog2_and_knn()
 		vc >> frame;
 	}
 
+	int resize_rows = frame.rows / 2;
+	int resize_cols = frame.cols / 2;
 	cv::Mat element = cv::getStructuringElement(cv::MORPH_RECT, cv::Size(3, 3), cv::Point(1, 1));
 
 	//unconditional loop     
@@ -139,7 +139,7 @@ void mog2_and_knn()
 		cv::Mat cameraFrame;
 		vc >> frame;
 
-		resize(frame, resizeF, cv::Size(frame.size().width / 2, frame.size().height / 2));
+		resize(frame, resizeF, cv::Size(resize_cols, resize_rows));
 		pMOG2->apply(resizeF, fgMaskMOG2);
 		pKNN->apply(resizeF, fgMaskKNN);
 		
@@ -174,12 +174,13 @@ void camera_work()
 
 	cv::VideoCapture vc;
 	{
-		vc.open(0);
+		vc.open(2);
 		if (!vc.isOpened())
 			throw runtime_error(string("can't open video file: "));
 		vc >> frame;
 	}
-
+	int resize_rows = frame.rows / 1;
+	int resize_cols = frame.cols / 1;
 	cv::Mat element = cv::getStructuringElement(cv::MORPH_RECT, cv::Size(3, 3), cv::Point(1, 1));
 
 	//unconditional loop     
@@ -187,7 +188,7 @@ void camera_work()
 		cv::Mat cameraFrame;
 		vc >> frame;
 
-		resize(frame, resizeF, cv::Size(frame.size().width / 2, frame.size().height / 2));
+		resize(frame, resizeF, cv::Size(resize_cols, resize_rows));
 		pMOG2->apply(resizeF, fgMaskMOG2);
 		pKNN->apply(resizeF, fgMaskKNN);
 
