@@ -19,6 +19,19 @@ using namespace std;
 #define HOG_IMG_07 IMAGE_ROOT"\\pedestrian\\1mp\\resize_P6213226.jpg"
 
 
+
+/*
+you can download video samples here
+pedestrian 01 : https://www.youtube.com/watch?v=9W-4zyBKio8&index=2&list=PLLdgPpcvAObDlkK3AAWaUohc3c97ex3Mr
+pedestrian 02 : https://www.youtube.com/watch?v=-wx62fiP-Y4&list=PLLdgPpcvAObDlkK3AAWaUohc3c97ex3Mr&index=9
+pedestrian 03 : https://www.youtube.com/watch?v=yt-t7WDDdCk&index=8&list=PLLdgPpcvAObDlkK3AAWaUohc3c97ex3Mr
+pedestrian 04 : https://www.youtube.com/watch?v=vLqOvkFi4N4&list=PLLdgPpcvAObDlkK3AAWaUohc3c97ex3Mr&index=7
+pedestrian 05 : https://www.youtube.com/watch?v=KuyeQoVVjBQ&index=6&list=PLLdgPpcvAObDlkK3AAWaUohc3c97ex3Mr
+pedestrian 06 : https://www.youtube.com/watch?v=II9EVXnqi7k&index=5&list=PLLdgPpcvAObDlkK3AAWaUohc3c97ex3Mr
+pedestrian 07 : https://www.youtube.com/watch?v=Z6PoOu8-BjI&list=PLLdgPpcvAObDlkK3AAWaUohc3c97ex3Mr&index=4
+pedestrian 08 : https://www.youtube.com/watch?v=f69yb0HWVbk&index=3&list=PLLdgPpcvAObDlkK3AAWaUohc3c97ex3Mr
+
+*/
 #define HOG_VID_01 IMAGE_ROOT"\\pedestrian\\pedestrian01.mp4"
 #define HOG_VID_02 IMAGE_ROOT"\\pedestrian\\pedestrian02.mp4"
 #define HOG_VID_03 IMAGE_ROOT"\\pedestrian\\pedestrian03.mp4"
